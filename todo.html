@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <a href="myMiniProject.html">HOME</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="todo.html">TO-DO LIST APP</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="photo-gallery.html">PHOTO GALLERY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="counterApp.html">COUNTER APP</a>
+          </nav>
+      </header>
+      <div class="container"> 
+        <section id="todo-list">
+            <h2>To-Do List App</h2>
+            <p>
+              The To-Do List App is a basic yet effective tool for managing daily tasks. 
+              With an easy-to-use interface, it allows users to add tasks to a list dynamically. 
+              The tasks are stored in an array, and a JavaScript function ensures that the 
+              list is updated and displayed in real time. By iterating over the array, 
+              the app provides a comprehensive overview of all tasks. This project emphasizes 
+              the use of JavaScript for DOM manipulation and demonstrates the power of loops 
+              and arrays in building interactive features.
+            </p>
+          </section>
+
+          <section id="todo-container">
+            <div class="todo">
+                <h1>To-Do List</h1>
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Task Name">
+                    <input type="date" id="dateInput" placeholder="Due Date">
+                    <input type="text" id="priorityInput" placeholder="Priority">
+                    <input type="text" id="categoryInput" placeholder="Category">
+                    <input type="text" id="descriptionInput" placeholder="Description">
+                    <input type="text" id="notesInput" placeholder="Notes"><br>
+                    <button id="addTaskButton">Add Task</button>
+                </div>
+                <ul id="taskList"></ul>
+            </div>
+        </section>
+    
+</div>
+         <!-- Footer -->
+    <footer>
+        <p>© 2024 Mini Projects by Samuel Otoo | All Rights Reserved</p>
+    </footer>
+    <script>
+        // JavaScript for the To-Do List App
+        const addTaskButton = document.getElementById('addTaskButton');
+        const taskInput = document.getElementById('taskInput');
+        const dateInput = document.getElementById('dateInput');
+        const priorityInput = document.getElementById('priorityInput');
+        const categoryInput = document.getElementById('categoryInput');
+        const descriptionInput = document.getElementById('descriptionInput');
+        const notesInput = document.getElementById('notesInput');
+        const taskList = document.getElementById('taskList');
+
+        addTaskButton.addEventListener('click', () => {
+            const taskName = taskInput.value.trim();
+            const dueDate = dateInput.value.trim();
+            const priority = priorityInput.value.trim();
+            const category = categoryInput.value.trim();
+            const description = descriptionInput.value.trim();
+            const notes = notesInput.value.trim();
+
+            if (taskName && dueDate && priority && category && description && notes) {
+                const listItem = document.createElement('li');
+
+                const taskDetails = {
+                    taskName,
+                    dueDate,
+                    priority,
+                    category,
+                    description,
+                    notes
+                };
+
+                const taskTextNode = document.createElement('span');
+                taskTextNode.textContent = taskName;
+                listItem.appendChild(taskTextNode);
+
+                listItem.addEventListener('click', () => {
+                    alert(`Task: ${taskDetails.taskName}\nDue Date: ${taskDetails.dueDate}\nPriority: ${taskDetails.priority}\nCategory: ${taskDetails.category}\nDescription: ${taskDetails.description}\nNotes: ${taskDetails.notes}`);
+                });
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    taskList.removeChild(listItem);
+                });
+                listItem.appendChild(deleteButton);
+
+                taskList.appendChild(listItem);
+
+                taskInput.value = '';
+                dateInput.value = '';
+                priorityInput.value = '';
+                categoryInput.value = '';
+                descriptionInput.value = '';
+                notesInput.value = '';
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
